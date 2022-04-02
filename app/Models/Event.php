@@ -7,13 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends  Model
 {
-
     use HasFactory;
 
     protected $fillable = [
-        'pacient_id','title', 'start', 'end'
+        'patient_id','title', 'start_date', 'end_date'
     ];
-
 
 
 }

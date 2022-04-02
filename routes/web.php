@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\PatientsComponent;
+use App\Http\Livewire\Calender;
 
-use App\Http\Controllers\FullCalenderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,19 @@ Route::get('/', function () {
 });
 
 
-Route::get('agenda', [FullCalenderController::class, 'index']);
-Route::post('agenda/action', [FullCalenderController::class, 'action']);
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
 
+//routas para os componetes  liveware
+Route::get('calender', [Calender::class, 'render']);
+Route::post('calender/ajax', [Calender::class, 'ajax']);
+
+Route::get('patients', PatientsComponent::class);
